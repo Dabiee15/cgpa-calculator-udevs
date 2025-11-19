@@ -1,0 +1,698 @@
+/* =====================================================
+   ROOT VARIABLES - LIGHT MODE (LIGHTEST SKY BLUE)
+   ===================================================== */
+:root {
+  --bg-primary: linear-gradient(135deg, #e0f7ff 0%, #b3e5fc 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.98);
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.4);
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-white: #ffffff;
+  --border-color: rgba(179, 229, 252, 0.5);
+  --shadow: 0 8px 32px rgba(135, 206, 250, 0.3);
+  --shadow-hover: 0 12px 48px rgba(135, 206, 250, 0.45);
+  --btn-primary-bg: linear-gradient(135deg, #81d4fa 0%, #4fc3f7 100%);
+  --btn-primary-hover: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  --btn-delete-bg: #007bff;
+  --btn-delete-hover: #0069d9;
+  --btn-secondary-bg: linear-gradient(135deg, #80deea 0%, #4dd0e1 100%);
+  --btn-secondary-hover: linear-gradient(135deg, #4dd0e1 0%, #26c6da 100%);
+  --table-header-bg: rgba(129, 212, 250, 0.15);
+  --table-row-hover: rgba(129, 212, 250, 0.08);
+  --accent-color: #29b6f6;
+  --glow-color: rgba(41, 182, 246, 0.4);
+}
+
+/* =====================================================
+   DARK MODE VARIABLES (DARKER BLUE)
+   ===================================================== */
+body.dark-mode {
+  --bg-primary: linear-gradient(135deg, #001a2e 0%, #002942 50%, #003d5c 100%);
+  --bg-secondary: rgba(15, 32, 47, 0.98);
+  --bg-card: rgba(20, 40, 60, 0.95);
+  --bg-glass: rgba(0, 20, 40, 0.4);
+  --text-primary: #e3f2fd;
+  --text-secondary: #b3d9f2;
+  --text-white: #ffffff;
+  --border-color: rgba(41, 182, 246, 0.3);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.8);
+  --btn-primary-bg: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  --btn-primary-hover: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+  --btn-delete-bg: #007bff;
+  --btn-delete-hover: #0069d9;
+  --btn-secondary-hover: linear-gradient(135deg, #0277bd 0%, #01579b 100%);
+  --table-header-bg: rgba(25, 118, 210, 0.2);
+  --table-row-hover: rgba(25, 118, 210, 0.15);
+  --accent-color: #42a5f5;
+  --glow-color: rgba(66, 165, 245, 0.5);
+}
+
+/* =====================================================
+   GLOBAL STYLES & ANIMATIONS
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--glow-color), 0 0 60px var(--glow-color);
+  }
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-primary);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: all 0.5s ease;
+  min-height: 100vh;
+}
+
+.App {
+  position: relative;
+  min-height: 100vh;
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* =====================================================
+   THEME TOGGLE BUTTON - FUTURISTIC
+   ===================================================== */
+.theme-toggle {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 1000;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  background: var(--btn-primary-bg);
+  color: var(--text-white);
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-hover);
+  animation: glow 2s infinite;
+}
+
+.theme-toggle:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* =====================================================
+   HOME CONTAINER
+   ===================================================== */
+.home-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  animation: fadeIn 1s ease-out;
+}
+
+/* =====================================================
+   HEADER - FUTURISTIC STYLE
+   ===================================================== */
+.app-header {
+  text-align: center;
+  padding: 60px 40px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 30px;
+  margin-bottom: 40px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  animation: slideIn 0.8s ease-out;
+}
+
+.app-header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.app-header h1 {
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 15px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 30px var(--glow-color);
+}
+
+.app-header p {
+  font-size: 1.3rem;
+  color: var(--bg-primary);
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* =====================================================
+   YEARS CONTAINER
+   ===================================================== */
+.years-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+/* =====================================================
+   YEAR CARD - GLASSMORPHISM
+   ===================================================== */
+.year-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 35px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.6s ease-out;
+  transition: all 0.4s ease;
+}
+
+.year-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.year-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.year-header h1 {
+  font-size: 2.5rem;
+  background:var(--accent-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.year-cgpa {
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 30px var(--glow-color);
+  animation: pulse 2s infinite;
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.year-cgpa strong {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =====================================================
+   SEMESTERS CONTAINER
+   ===================================================== */
+.semesters-container {
+display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  min-width: 320px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+  gap: 25px;
+  margin-bottom: 25px;
+   width: 100%;
+  margin: 1rem 0;
+  border-radius: 16px;
+  overflow: hidden;
+   margin: 1rem 0;
+  border-radius: 16px;
+}
+
+/* =====================================================
+   SEMESTER CARD - MODERN GLASS
+   ===================================================== */
+.semester-card {
+  grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  min-width: 320px;
+  background: var(--bg-card);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 25px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.semester-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.semester-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.semester-header h2 {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.semester-summary {
+  margin-top: 20px;
+  padding: 20px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.summary-item {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.summary-item strong {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =====================================================
+   COURSE FORM - FUTURISTIC INPUT
+   ===================================================== */
+.course-form {
+  
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.course-form h3 {
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.course-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 14px 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px var(--glow-color);
+  transform: translateY(-2px);
+}
+
+.form-group input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* =====================================================
+   COURSE TABLE - MODERN DESIGN
+   ===================================================== */
+.course-table {
+  margin-bottom: 20px;
+  overflow-x: auto; /* ➜ Add this */
+  scrollbar-width: thin; /* Optional */
+}
+
+.course-table h3 {
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.course-table table {
+  min-width: 600px;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-card);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.course-table thead {
+  background: var(--table-header-bg);
+  backdrop-filter: blur(10px);
+}
+
+.course-table th,
+.course-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.course-table th {
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.course-table td {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.course-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.course-table tbody tr:hover {
+  background: var(--table-row-hover);
+  transform: scale(1.01);
+}
+
+.course-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.course-table-empty {
+  padding: 40px;
+  text-align: center;
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 2px dashed var(--border-color);
+  margin-bottom: 20px;
+}
+
+.course-table-empty p {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* =====================================================
+   BUTTONS - FUTURISTIC STYLE
+   ===================================================== */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--text-white);
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  text-transform: uppercase;
+}
+
+.btn-primary:hover {
+  background: var(--btn-primary-hover);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+  transform: translateY(-3px);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+.btn-delete {
+  background: var(--btn-delete-bg);
+  color: var(--text-white);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 10px rgba(245, 87, 108, 0.4);
+}
+
+.btn-delete:hover {
+  background: var(--btn-delete-hover);
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.6);
+  transform: scale(1.08);
+}
+
+.btn-delete-semester,
+.btn-delete-year {
+  background: var(--btn-delete-bg);
+  color: var(--text-white);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 12px rgba(245, 87, 108, 0.4);
+}
+
+.btn-delete-semester:hover,
+.btn-delete-year:hover {
+  background: var(--btn-delete-hover);
+  box-shadow: 0 5px 20px rgba(245, 87, 108, 0.6);
+  transform: translateY(-2px) scale(1.05);
+}
+
+.btn-add-semester,
+.btn-add-year {
+  background: var(--btn-secondary-bg);
+  color: var(--text-white);
+  padding: 16px 32px;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-add-semester:hover,
+.btn-add-year:hover {
+  background: var(--btn-secondary-hover);
+  box-shadow: 0 6px 25px rgba(79, 172, 254, 0.6);
+  transform: translateY(-3px);
+}
+
+.add-year-container {
+  text-align: center;
+  margin: 40px 0;
+  animation: fadeIn 1s ease-out;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+.app-footer {
+  text-align: center;
+  padding: 40px 30px;
+  margin-top: 50px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.app-footer p {
+  color: var(--text-white);
+  font-size: 1rem;
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .semesters-container {
+    grid-template-columns: 1fr;
+  }
+
+  .semester-summary {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .theme-toggle {
+    top: 15px;
+    right: 15px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .year-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 15px;
+  }
+
+  .app-header {
+    padding: 40px 20px;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .year-card,
+  .semester-card {
+    padding: 20px;
+  }
+
+  .course-table table {
+    font-size: 0.85rem;
+  }
+
+  .course-table th,
+  .course-table td {
+    padding: 10px;
+  }
+}
